@@ -3,8 +3,6 @@ from glob import glob
 
 import cv2
 import numpy as np
-from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 from tqdm import tqdm
 
@@ -23,7 +21,7 @@ def extract_hand(img, flatten=True):
     img = cv2.GaussianBlur(img,(5,5),0)
 
     # OTSU threshold
-    ret, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    ret, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
     if flatten:
         # binarize data
@@ -43,15 +41,27 @@ if __name__ == "__main__":
         images.extend(map(extract_hand, files))
         targets.extend([number] * len(files))
 
-    x_train, x_test, y_train, y_test = train_test_split(images, targets, test_size = 0.2, random_state = 42)
-
     model = LinearSVC(dual=False)
-    model.fit(x_train, y_train)
-    y_pred = model.predict(x_test)
+    model.fit(images, targets)
 
-    print(accuracy_score(y_test, y_pred))
-    print(confusion_matrix(y_test, y_pred))
+    video = cv2.VideoCapture('test.mp4')
+    back_sub = cv2.createBackgroundSubtractorKNN()
 
-    # show image
-    #cv2.imshow('hand', hand)
-    #cv2.waitKey(0)
+    while(True):
+        ret, frame = video.read()
+
+        if not ret:
+            video.set(cv2.CAP_PROP_POS_FRAMES, 0)
+        else:
+            #frame = back_sub.apply(frame, 1)
+            x = model.predict(extract_hand(frame).reshape(1, -1))
+            print(x)
+
+            hand = extract_hand(frame, flatten=False)
+            cv2.imshow('image', hand)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
