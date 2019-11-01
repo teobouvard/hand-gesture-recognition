@@ -9,10 +9,11 @@ else
 	exit
 fi
 
+# can change 'test' to 'train' for more images 
 for i in {0..5}
 do
 	mkdir -p data/$i
-	/bin/cp /tmp/dataset/train/*_$i*.png data/$i
+	/bin/cp /tmp/dataset/test/*_$i*.png data/$i
 done
 
 rm -r /tmp/dataset
