@@ -6,22 +6,34 @@ import numpy as np
 from sklearn.svm import LinearSVC
 from tqdm import tqdm
 
-SIZE = (50, 50)
+SIZE = (500, 500)
 
 def extract_hand(img, flatten=True):
     # read image as grayscale and resize it
     if type(img) == str:
         img = cv2.imread(img, cv2.COLOR_BGR2GRAY)
     else:
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
     img = cv2.resize(img, SIZE)
+    img = cv2.bilateralFilter(img, 7, 50, 50)
+    #img = cv2.bitwise_and(img, img, mask = mask)
+    ret, img = cv2.threshold(img, 70, 255, cv2.THRESH_BINARY)
+    #img = cv2.GaussianBlur(img,(5, 5),0)
+    #img = cv2.Canny(img, 10, 120)
 
     # blur
-    img = cv2.GaussianBlur(img,(5,5),0)
 
     # OTSU threshold
-    ret, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    # ret, img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    #lower = np.array([20, 0, 0])
+    #upper = np.array([80,255,255])
+    #img = cv2.inRange(img, lower, upper)
+
+    
+
+    # Bitwise-AND mask and original image
+
 
     if flatten:
         # binarize data
@@ -44,7 +56,7 @@ if __name__ == "__main__":
     #model = LinearSVC(dual=False)
     #model.fit(images, targets)
 
-    video = cv2.VideoCapture(0)
+    video = cv2.VideoCapture('test.mp4')
     back_sub = cv2.createBackgroundSubtractorKNN()
 
     while(True):
@@ -57,8 +69,9 @@ if __name__ == "__main__":
             #x = model.predict(extract_hand(frame).reshape(1, -1))
             #print(x)
 
-            #hand = extract_hand(frame, flatten=False)
-            cv2.imshow('image', frame)
+            hand = extract_hand(frame, flatten=False)
+            cv2.imshow('image', hand)
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
