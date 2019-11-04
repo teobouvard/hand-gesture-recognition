@@ -33,18 +33,18 @@ def extract_hand(img, flatten=True):
 
 
 if __name__ == "__main__":
-    images = []
-    targets = []
+    #images = []
+    #targets = []
+#
+    #for number in tqdm(os.listdir('data')):
+    #    files = glob(os.path.join('data', number, '*.png'))
+    #    images.extend(map(extract_hand, files))
+    #    targets.extend([number] * len(files))
+#
+    #model = LinearSVC(dual=False)
+    #model.fit(images, targets)
 
-    for number in tqdm(os.listdir('data')):
-        files = glob(os.path.join('data', number, '*.png'))
-        images.extend(map(extract_hand, files))
-        targets.extend([number] * len(files))
-
-    model = LinearSVC(dual=False)
-    model.fit(images, targets)
-
-    video = cv2.VideoCapture('test.mp4')
+    video = cv2.VideoCapture(0)
     back_sub = cv2.createBackgroundSubtractorKNN()
 
     while(True):
@@ -54,11 +54,11 @@ if __name__ == "__main__":
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
         else:
             #frame = back_sub.apply(frame, 1)
-            x = model.predict(extract_hand(frame).reshape(1, -1))
-            print(x)
+            #x = model.predict(extract_hand(frame).reshape(1, -1))
+            #print(x)
 
-            hand = extract_hand(frame, flatten=False)
-            cv2.imshow('image', hand)
+            #hand = extract_hand(frame, flatten=False)
+            cv2.imshow('image', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
