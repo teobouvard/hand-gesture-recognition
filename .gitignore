@@ -1,4 +1,6 @@
-*.png
 *.swp
 *.mp4
 *.zip
+*.joblib
+__pycache__
+data/
