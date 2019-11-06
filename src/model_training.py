@@ -11,6 +11,7 @@ from tqdm import tqdm
 
 from image_preprocessing import extract_hand
 
+
 if __name__ == "__main__":
     features = []
     targets = []

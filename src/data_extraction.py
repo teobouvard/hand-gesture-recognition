@@ -1,22 +1,26 @@
 import os
+from datetime import datetime
 from glob import glob
+
 import cv2
 import numpy as np
 from tqdm import tqdm
-from datetime import datetime
+
 from image_preprocessing import extract_hand
 
+
 def clean_data_dir():
+    # remove all existing pictures in training directory
     path = os.path.join('data', 'train', '*', '*.jpg')
     images = glob(path)
     for image in images:
-        os.remove(image)  
+        os.remove(image)
+    
 
-
-if __name__ == "__main__":
-    clean_data_dir()
+def extract_data():
     videos = glob('videos/*')
 
+    # for each video, extract hand at each frame and save the image in corresponding class folder
     for filename in videos:
         fingers = os.path.basename(filename)[0]
         video = cv2.VideoCapture(filename)
@@ -46,5 +50,9 @@ if __name__ == "__main__":
         
         # release the capture
         video.release()
-        cv2.destroyAllWindows()
-    
+        cv2.destroyAllWindows()    
+
+
+if __name__ == "__main__":
+    clean_data_dir()
+    extract_data()
