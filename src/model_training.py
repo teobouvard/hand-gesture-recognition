@@ -40,7 +40,7 @@ if __name__ == "__main__":
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-    model.fit(x_train, y_train, epochs=10)
+    model.fit(x_train, y_train, epochs=5)
 
     test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=2)
 

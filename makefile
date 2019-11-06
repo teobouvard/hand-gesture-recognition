@@ -9,6 +9,9 @@ train:
 demo:
 	python3 src/fingers.py
 
+compress:
+	./compress_videos.sh
+
 report:
 	mkdir -p project
 	cp src report.pdf readme.md project

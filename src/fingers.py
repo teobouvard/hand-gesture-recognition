@@ -8,13 +8,13 @@ from tqdm import tqdm
 
 from image_preprocessing import extract_hand
 
-CONFIDENCE_THRESHOLD = 0.8
+CONFIDENCE_THRESHOLD = 0.75
 
 
 if __name__ == "__main__":
     # load pre-trained model and open test video
     model = keras.models.load_model('trained_classifier.h5')
-    video = cv2.VideoCapture('data/test.MOV')
+    video = cv2.VideoCapture('data/test.mp4')
 
     while(video.isOpened()):
         ret, frame = video.read()

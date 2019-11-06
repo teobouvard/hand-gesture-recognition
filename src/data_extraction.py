@@ -18,7 +18,7 @@ def clean_data_dir():
     
 
 def extract_data():
-    videos = glob('videos/*')
+    videos = glob('videos/*_reduced.mp4')
 
     # for each video, extract hand at each frame and save the image in corresponding class folder
     for filename in sorted(videos):
