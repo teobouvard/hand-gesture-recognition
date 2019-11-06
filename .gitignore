@@ -4,4 +4,4 @@
 *.joblib
 __pycache__
 data/
-video_snapshots
+videos/
