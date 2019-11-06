@@ -1,7 +1,7 @@
 *.swp
 *.mp4
 *.zip
-*.joblib
+*.h5
 __pycache__
 data/
 videos/
