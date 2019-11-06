@@ -1,2 +1,7 @@
-*.png
 *.swp
+*.mp4
+*.zip
+*.h5
+__pycache__
+data/
+videos/
