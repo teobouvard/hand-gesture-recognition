@@ -21,11 +21,11 @@ def extract_data():
     videos = glob('videos/*')
 
     # for each video, extract hand at each frame and save the image in corresponding class folder
-    for filename in videos:
+    for filename in sorted(videos):
         fingers = os.path.basename(filename)[0]
         video = cv2.VideoCapture(filename)
 
-        while(True):
+        while(video.isOpened()):
             ret, frame = video.read()
             if ret:
 

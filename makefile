@@ -8,3 +8,7 @@ train:
 
 demo:
 	python3 src/fingers.py
+
+report:
+	mkdir -p project
+	cp src report.pdf readme.md project

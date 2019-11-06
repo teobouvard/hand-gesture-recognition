@@ -2,6 +2,7 @@
 *.MOV
 *.zip
 *.h5
+*.gz
 __pycache__
 data/
 videos/

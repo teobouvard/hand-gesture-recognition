@@ -12,11 +12,11 @@ CONFIDENCE_THRESHOLD = 0.8
 
 
 if __name__ == "__main__":
-    # load pre-trained model and open capture
+    # load pre-trained model and open test video
     model = keras.models.load_model('trained_classifier.h5')
-    video = cv2.VideoCapture('test.MOV')
+    video = cv2.VideoCapture('data/test.MOV')
 
-    while(True):
+    while(video.isOpened()):
         ret, frame = video.read()
         if ret:
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         
         else:
             break
-                
+
     # release the capture
     video.release()
     cv2.destroyAllWindows()
