@@ -36,7 +36,7 @@ if __name__ == "__main__":
                 fingers = '?'
 
             # display image and number of fingers
-            frame = extract_hand(frame, size=(1000, 1000), crop=False)
+            frame = extract_hand(frame, size=(1000, 600), crop=False)
             frame = cv2.putText(frame, f'{str(fingers)} ({confidence:.2f})', (10, 80), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 2, (255, 255, 255))
             cv2.imshow('Fingers detection', frame)
 
@@ -44,7 +44,8 @@ if __name__ == "__main__":
                 break
         
         else:
-            break
+            # loop video
+            video.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
     # release the capture
     video.release()
