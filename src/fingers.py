@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from image_preprocessing import extract_hand
 
-CONFIDENCE_THRESHOLD = 0.75
+CONFIDENCE_THRESHOLD = 0.9
 
 
 if __name__ == "__main__":
@@ -22,8 +22,6 @@ if __name__ == "__main__":
 
             # extract hand features from current frame
             features = extract_hand(frame, crop=True)
-            if features.max() != 0:
-                features /= 255.0
 
             # create batch with single instance
             features = np.expand_dims(features, 0)

@@ -28,10 +28,10 @@ def extract_hand(img, crop, size=(50, 50)):
         if cv2.contourArea(c) > MIN_HAND_SIZE:
             img = bound_box(img, c, crop)
 
-    img = cv2.GaussianBlur(img, (3, 3), cv2.BORDER_DEFAULT)
     img = cv2.resize(img, size)
+    img = cv2.GaussianBlur(img, (3, 3), cv2.BORDER_DEFAULT)
 
-    return img.astype(float)
+    return img
 
 
 def bound_box(img, contour, crop):

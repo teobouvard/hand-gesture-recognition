@@ -56,3 +56,10 @@ def extract_data():
 if __name__ == "__main__":
     clean_data_dir()
     extract_data()
+
+    #frame = cv2.imread('report_img/original.png')
+    #hand = extract_hand(frame, crop=True, size=(50, 50))
+    #cv2.imshow(f'Extracting images', hand)
+    #cv2.waitKey(0)
+    #cv2.imwrite('report_img/filtered.png', hand)
+    #cv2.destroyAllWindows()   

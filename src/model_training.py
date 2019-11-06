@@ -25,7 +25,7 @@ if __name__ == "__main__":
             features.append(image)
             targets.append(i)
 
-    features = np.array(features) / 255
+    features = np.array(features) #/ 255
     targets = np.array(targets)
 
     x_train, x_test, y_train, y_test = train_test_split(features, targets, test_size = 0.2, random_state = 42)
@@ -40,7 +40,7 @@ if __name__ == "__main__":
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-    model.fit(x_train, y_train, epochs=5)
+    model.fit(x_train, y_train, epochs=3)
 
     test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=2)
 
