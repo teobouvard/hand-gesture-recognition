@@ -8,6 +8,8 @@ from tensorflow import keras
 from tqdm import tqdm
 from image_preprocessing import extract_hand
 
+CONFIDENCE_THRESHOLD = 0.8
+
 
 if __name__ == "__main__":
     model = keras.models.load_model('trained_classifier.h5')
@@ -19,14 +21,15 @@ if __name__ == "__main__":
         # extract hand features from current frame
         features = extract_hand(frame, crop=True)
         if features.max() != 0:
-            features = np.array(features) / 255
+            features /= 255.0
         features = np.expand_dims(features, 0)
 
         # predict the number of finger with pretrained model
-        predictions = model.predict(features)
+        predictions = model.predict(features)[0]
         fingers = np.argmax(predictions)
-        confidence = predictions[fingers-1][0]
-        print(confidence)
+        confidence = predictions[fingers]
+        if confidence < CONFIDENCE_THRESHOLD :
+            fingers = '?'
 
         # display image and number of fingers
         frame = extract_hand(frame, size=(500, 500), crop=False)

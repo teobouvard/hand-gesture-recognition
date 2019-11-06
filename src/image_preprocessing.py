@@ -31,7 +31,7 @@ def extract_hand(img, crop, size=(50, 50)):
     img = cv2.GaussianBlur(img, (3, 3), cv2.BORDER_DEFAULT)
     img = cv2.resize(img, size)
 
-    return img
+    return img.astype(float)
 
 
 def bound_box(img, contour, crop):
