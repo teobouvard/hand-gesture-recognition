@@ -15,13 +15,13 @@ if __name__ == "__main__":
         hand = extract_hand(frame, crop=True, flatten=False)
         cv2.imshow('image', hand)
         #cv2.imwrite(os.path.join('video_snapshots', f'{str(datetime.now())}.jpg'), hand)
+        
 
-
-        if cv2.waitKey(1) == ord(' '):
-            cv2.waitKey(0)
-        if cv2.waitKey(1) == ord('q'):
+        keypress = cv2.waitKey(1)
+        if  keypress == ord('q'):
             # release the capture
             video.release()
             cv2.destroyAllWindows()
             break
-
+        elif keypress == ord(' '):
+            cv2.waitKey(0)
