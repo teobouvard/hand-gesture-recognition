@@ -33,7 +33,7 @@ if __name__ == "__main__":
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(50, 50)),
         keras.layers.Dense(128, activation='relu'),
-        keras.layers.Dense(2, activation='softmax')
+        keras.layers.Dense(6, activation='softmax')
     ])
     
     model.compile(optimizer='adam',
@@ -46,4 +46,5 @@ if __name__ == "__main__":
 
     print(f'Test accuracy : {test_acc}')
 
+    model.fit(features, targets)
     model.save('trained_classifier.h5')
