@@ -40,12 +40,17 @@ if __name__ == "__main__":
     model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
+    
+    initial_weights = model.get_weights()
 
     model.fit(x_train, y_train, epochs=3)
 
     test_loss, test_acc = model.evaluate(x_test,  y_test, verbose=2)
 
-    print(f'Test accuracy : {test_acc}')
+    print(f'Accuracy on {len(x_test)} test samples: {test_acc}')
 
-    model.fit(features, targets)
+    #reset the model weights before training on the whole dataset
+    model.set_weights(initial_weights)
+
+    model.fit(features, targets, epochs=3)
     model.save('trained_classifier.h5')
