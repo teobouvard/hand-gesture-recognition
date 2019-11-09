@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 from glob import glob
 
@@ -40,8 +41,15 @@ if __name__ == "__main__":
             frame = cv2.putText(frame, f'{str(fingers)} ({confidence:.2f})', (10, 80), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 2, (255, 255, 255))
             cv2.imshow('Fingers detection', frame)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            # handle keypress
+            keypress = cv2.waitKey(1)
+            if  keypress == ord('q'):
+                break     
+            elif keypress == ord('s'):
+                # snapshot
+                cv2.imwrite(os.path.join('demo_img', f'{str(datetime.now())}.jpg'), frame)
+
+
         
         else:
             # loop video

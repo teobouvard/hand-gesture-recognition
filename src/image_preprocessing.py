@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-MIN_HAND_SIZE = 10000
+MIN_HAND_SIZE = 100000
 
 def extract_hand(img, crop, size=(50, 50)):
     # read image from stream

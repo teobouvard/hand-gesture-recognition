@@ -3,5 +3,6 @@
 *.zip
 *.h5
 *.gz
+*.mp4
 __pycache__
 videos/
