@@ -11,7 +11,3 @@ demo:
 
 compress:
 	./compress_videos.sh
-
-report:
-	mkdir -p project
-	cp src report.pdf readme.md project
