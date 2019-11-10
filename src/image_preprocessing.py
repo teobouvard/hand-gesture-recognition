@@ -5,7 +5,7 @@ import os
 MIN_HAND_SIZE = 100000
 
 def extract_hand(img, crop, size=(50, 50)):
-    # read image from stream
+    # convert to HSV
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # create kernel for morphological operations
@@ -28,7 +28,10 @@ def extract_hand(img, crop, size=(50, 50)):
         if cv2.contourArea(c) > MIN_HAND_SIZE:
             img = bound_box(img, c, crop)
 
+    # resizing
     img = cv2.resize(img, size)
+
+    # filtering
     img = cv2.GaussianBlur(img, (3, 3), cv2.BORDER_DEFAULT)
 
     return img

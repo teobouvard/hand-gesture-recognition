@@ -49,12 +49,10 @@ if __name__ == "__main__":
                 # snapshot
                 cv2.imwrite(os.path.join('demo_img', f'{str(datetime.now())}.jpg'), frame)
 
-
-        
         else:
             # loop video
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
-    # release the capture
+    # release the capture on exit
     video.release()
     cv2.destroyAllWindows()
