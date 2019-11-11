@@ -40,6 +40,7 @@ if __name__ == "__main__":
             frame = extract_hand(frame, size=(1000, 600), crop=False)
             frame = cv2.putText(frame, f'{str(fingers)} ({confidence:.2f})', (10, 80), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 2, (255, 255, 255))
             cv2.imshow('Fingers detection', frame)
+            #cv2.imwrite(f'demo_vid/{str(datetime.now())}.jpg', frame)
 
             # handle keypress
             keypress = cv2.waitKey(1)

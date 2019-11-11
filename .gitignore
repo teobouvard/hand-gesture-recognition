@@ -3,6 +3,7 @@
 *.zip
 *.h5
 *.gz
+*.avi
 *.mp4
 __pycache__
 videos/
